@@ -1,7 +1,7 @@
 {
   "name": "leaflet-hotline",
   "version": "0.1.0",
-  "description": "A Leaflet plugin for drawing gradients along a polyline",
+  "description": "A Leaflet plugin for drawing colored gradients along a polyline",
   "main": "src/leaflet.hotline.js",
   "scripts": {
     "test": "npm run lint",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/iosphere/leaflet.hotline.git"
+    "url": "git://github.com/iosphere/Leaflet.hotline.git"
   },
   "keywords": [
     "Leaflet",
@@ -22,14 +22,17 @@
     "canvas",
     "visualization",
     "path",
-    "gradient"
+    "gradient",
+    "heatmap",
+    "color",
+    "colour"
   ],
   "author": "Jonas Coch",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/iosphere/leaflet.hotline/issues"
+    "url": "https://github.com/iosphere/Leaflet.hotline/issues"
   },
-  "homepage": "https://iosphere.github.com/leaflet.hotline",
+  "homepage": "https://iosphere.github.io/Leaflet.hotline/demo/",
   "devDependencies": {
     "eslint": "^0.23.0",
     "uglify-js": "^2.4.23"
