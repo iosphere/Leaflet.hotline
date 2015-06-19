@@ -34,6 +34,10 @@
 			width: 100%;
 			height: 300px;
 		}
+		.muted {
+			color: #666;
+			font-size: 0.8em;
+		}
 	</style>
 </head>
 <body>
@@ -49,13 +53,13 @@
 		<div id="map"></div>
 		<aside>
 			<label>
-				<span>Weight</span>
-				<input id="weight" type="range" min="1" max="16" value="5"/>
+				<span>Weight - </span>
+				1 <input id="weight" type="range" min="1" max="16" value="5"/> 16
 			</label>
 			<br/>
 			<label>
-				<span>Outline width</span>
-				<input id="outlineWidth" type="range" min="0" max="8" value="1"/>
+				<span>Outline width - </span>
+				0 <input id="outlineWidth" type="range" min="0" max="8" value="1"/> 8
 			</label>
 			<label>
 				<span>Outline color</span>
@@ -63,14 +67,14 @@
 			</label>
 			<br/>
 			<label>
-				<span>Min</span>
-				<input id="min" type="range" min="100" max="250" value="150" steps="5"/>
+				<span>Min - </span>
+				100 <input id="min" type="range" min="100" max="250" value="150" steps="5"/> 250
 			</label>
 			<label>
-				<span>Max</span>
-				<input id="max" type="range" min="250" max="500" value="350" steps="5"/>
+				<span>Max - </span>
+				250 <input id="max" type="range" min="250" max="500" value="350" steps="5"/> 500
 			</label>
-			<br/>
+			<p class="muted">The range of the z values is around 150 to 350. All values below the minimum get displayed in the start color of the palette, all values above 350 get displayed in the end color of the palette. All values in between get displayed in the color of the gradient (as defined by the palette) picked at their relative position.</p>
 			<label>
 				<span>Palette color 1</span>
 				<input id="paletteColor1" type="color" value="#008800"/>
@@ -84,8 +88,8 @@
 				<input id="paletteColor3" type="color" value="#ff0000"/>
 			</label>
 			<label>
-				<span>Smooth factor</span>
-				<input type="range" id="smoothFactor" value="1" min="0" max="10" />
+				<span>Smooth factor - </span>
+				0 <input type="range" id="smoothFactor" value="1" min="0" max="10" /> 10
 			</label>
 		</aside>
 	</section>
