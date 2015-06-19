@@ -1,0 +1,37 @@
+{
+  "name": "leaflet-hotline",
+  "version": "0.1.0",
+  "description": "A Leaflet plugin for drawing gradients along a polyline",
+  "main": "src/leaflet.hotline.js",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint src/leaflet.hotline.js",
+    "clean": "rm -rf dist",
+    "beautify": "uglifyjs src/leaflet.hotline.js -b --comments /iosphere/ > dist/leaflet.hotline.js",
+    "minify": "uglifyjs src/leaflet.hotline.js -c -m --comments /iosphere/ > dist/leaflet.hotline.min.js",
+    "prebuild": "npm run clean && mkdir -p dist",
+    "build": "npm run test && npm run beautify && npm run minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iosphere/leaflet.hotline.git"
+  },
+  "keywords": [
+    "Leaflet",
+    "plugin",
+    "canvas",
+    "visualization",
+    "path",
+    "gradient"
+  ],
+  "author": "Jonas Coch",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/iosphere/leaflet.hotline/issues"
+  },
+  "homepage": "https://iosphere.github.com/leaflet.hotline",
+  "devDependencies": {
+    "eslint": "^0.23.0",
+    "uglify-js": "^2.4.23"
+  }
+}
