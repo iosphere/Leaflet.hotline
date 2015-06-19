@@ -11,7 +11,7 @@ Leaflet.hotline only works with **Leaflet 1.0-dev**. You can [download](http://l
 
 ## Installation
 
-* Run `npm install leaflet.hotline`
+* Run `npm install leaflet-hotline`
 * or download the latest package
 
 
@@ -30,7 +30,7 @@ var L = require('leaflet')
 
 // Pass Leaflet to the plugin.
 // Only required to overload once, subsequent overloads will return the same instance.
-require('leaflet.hotline')(L);
+require('leaflet-hotline')(L);
 
 // Create a hotline layer
 var hotlineLayer = L.hotline(data, options).addTo(map);
