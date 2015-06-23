@@ -64,7 +64,7 @@ var hotlineLayer = new L.Hotline(data, options).addTo(map);
 
 ### `data`
 
-The `data` parameter needs to be an array of `LatLng` points (a polyline) with an additional third element in each point, like the elevation, that determines which color from the `palette` to use. Multiple polylines are supported.
+The `data` parameter needs to be an array of `LatLng` points (a polyline) with an additional third element in each point, like the elevation that determines which color from the `palette` to use. Multiple polylines are supported.
 
 ### `options`
 
