@@ -6,7 +6,8 @@ Inspired by [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat/).
 
 ## Requirements
 
-Leaflet.hotline only works with **Leaflet 1.0-dev**. You can [download](http://leaflet-cdn.s3.amazonaws.com/build/leaflet-master.zip) it or build it from [source](https://github.com/Leaflet/Leaflet) (use the master branch). It creates its own renderer that draws on a canvas element.
+Leaflet.hotline only works with **Leaflet 1.0 beta**, which is available through NPM, Bower, and [GitHub download](https://github.com/Leaflet/Leaflet/archive/v1.0.0-beta.1.zip).
+Leaflet.hotline needs a browser with canvas support because it creates its own renderer that draws on a canvas element.
 
 
 ## Installation
