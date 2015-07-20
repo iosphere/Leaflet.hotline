@@ -84,6 +84,12 @@ You can use the following options to style the hotline:
 `npm install && npm run build`
 
 
+## Changelog
+
+- **0.1.1** - Uses Leaflet 1.0 beta in demo and README
+- **0.1.0** - Initial public release
+
+
 ## Credits
 
 * [@mourner](https://github.com/mourner) for [Leaflet](https://github.com/Leaflet/Leaflet/) and [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat/)
