@@ -86,6 +86,7 @@ You can use the following options to style the hotline:
 
 ## Changelog
 
+- **0.2.0** - Adds `getRGBForValue` method to the hotline layer
 - **0.1.1** - Uses Leaflet 1.0 beta in demo and README
 - **0.1.0** - Initial public release
 
