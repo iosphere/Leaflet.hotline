@@ -208,6 +208,22 @@
 		},
 
 		/**
+		 * Gets the RGB values of a given z value of the current palette.
+		 * @param {number} value - Value to get the color for, should be between min and max.
+		 * @returns {Array.<number>} The RGB values as an array [r, g, b]
+		 */
+		getRGBForValue: function (value) {
+			var valueRelative = Math.min(Math.max((value - this._min) / (this._max - this._min), 0), 0.999);
+			var paletteIndex = Math.floor(valueRelative * 256) * 4;
+
+			return [
+				this._palette[paletteIndex],
+				this._palette[paletteIndex + 1],
+				this._palette[paletteIndex + 2]
+			];
+		},
+
+		/**
 		 * Draws the outline of the graphs.
 		 * @private
 		 */
@@ -241,8 +257,8 @@
 		 * @private
 		 */
 		_drawHotline: function (ctx) {
-			var i, j, dataLength, path, pathLength, pointStart, pointEnd, zStart, zEnd,
-					gradient, gradientStart, gradientEnd;
+			var i, j, dataLength, path, pathLength, pointStart, pointEnd,
+					gradient, gradientStartRGB, gradientEndRGB;
 
 			ctx.lineWidth = this._weight;
 
@@ -253,27 +269,12 @@
 					pointStart = path[j - 1];
 					pointEnd = path[j];
 
-					zStart = Math.min(Math.max((pointStart.z - this._min) / (this._max - this._min), 0), 0.99);
-					zEnd = Math.min(Math.max((pointEnd.z - this._min) / (this._max - this._min), 0), 0.99);
-
 					// Create a gradient for each segment, pick start end end colors from palette gradient
 					gradient = ctx.createLinearGradient(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
-					gradientStart = Math.floor(zStart * 256) * 4;
-					gradientEnd = Math.floor(zEnd * 256) * 4;
-					gradient.addColorStop(0,
-						'rgba('
-						+ this._palette[gradientStart] + ','
-						+ this._palette[gradientStart + 1] + ','
-						+ this._palette[gradientStart + 2] + ','
-						+ '1)'
-					);
-					gradient.addColorStop(1,
-						'rgba('
-						+ this._palette[gradientEnd] + ','
-						+ this._palette[gradientEnd + 1] + ','
-						+ this._palette[gradientEnd + 2] + ','
-						+ '1)'
-					);
+					gradientStartRGB = this.getRGBForValue(pointStart.z);
+					gradientEndRGB = this.getRGBForValue(pointEnd.z);
+					gradient.addColorStop(0, 'rgb(' + gradientStartRGB.join(',') + ')');
+					gradient.addColorStop(1, 'rgb(' + gradientEndRGB.join(',') + ')');
 
 					ctx.strokeStyle = gradient;
 					ctx.beginPath();
@@ -396,6 +397,10 @@
 			weight: 5,
 			outlineColor: 'black',
 			outlineWidth: 1
+		},
+
+		getRGBForValue: function (value) {
+			return this._renderer._hotline.getRGBForValue(value);
 		},
 
 		/**

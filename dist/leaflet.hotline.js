@@ -103,6 +103,11 @@
             this._drawHotline(ctx);
             return this;
         },
+        getRGBForValue: function(value) {
+            var valueRelative = Math.min(Math.max((value - this._min) / (this._max - this._min), 0), .999);
+            var paletteIndex = Math.floor(valueRelative * 256) * 4;
+            return [ this._palette[paletteIndex], this._palette[paletteIndex + 1], this._palette[paletteIndex + 2] ];
+        },
         _drawOutline: function(ctx, clear) {
             var i, j, dataLength, path, lineWidth, pathLength, pointStart, pointEnd;
             if (clear || this._outlineWidth) {
@@ -123,20 +128,18 @@
             }
         },
         _drawHotline: function(ctx) {
-            var i, j, dataLength, path, pathLength, pointStart, pointEnd, zStart, zEnd, gradient, gradientStart, gradientEnd;
+            var i, j, dataLength, path, pathLength, pointStart, pointEnd, gradient, gradientStartRGB, gradientEndRGB;
             ctx.lineWidth = this._weight;
             for (i = 0, dataLength = this._data.length; i < dataLength; i++) {
                 path = this._data[i];
                 for (j = 1, pathLength = path.length; j < pathLength; j++) {
                     pointStart = path[j - 1];
                     pointEnd = path[j];
-                    zStart = Math.min(Math.max((pointStart.z - this._min) / (this._max - this._min), 0), .99);
-                    zEnd = Math.min(Math.max((pointEnd.z - this._min) / (this._max - this._min), 0), .99);
                     gradient = ctx.createLinearGradient(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
-                    gradientStart = Math.floor(zStart * 256) * 4;
-                    gradientEnd = Math.floor(zEnd * 256) * 4;
-                    gradient.addColorStop(0, "rgba(" + this._palette[gradientStart] + "," + this._palette[gradientStart + 1] + "," + this._palette[gradientStart + 2] + "," + "1)");
-                    gradient.addColorStop(1, "rgba(" + this._palette[gradientEnd] + "," + this._palette[gradientEnd + 1] + "," + this._palette[gradientEnd + 2] + "," + "1)");
+                    gradientStartRGB = this.getRGBForValue(pointStart.z);
+                    gradientEndRGB = this.getRGBForValue(pointEnd.z);
+                    gradient.addColorStop(0, "rgb(" + gradientStartRGB.join(",") + ")");
+                    gradient.addColorStop(1, "rgb(" + gradientEndRGB.join(",") + ")");
                     ctx.strokeStyle = gradient;
                     ctx.beginPath();
                     ctx.moveTo(pointStart.x, pointStart.y);
@@ -231,6 +234,9 @@
             weight: 5,
             outlineColor: "black",
             outlineWidth: 1
+        },
+        getRGBForValue: function(value) {
+            return this._renderer._hotline.getRGBForValue(value);
         },
         _projectLatlngs: function(latlngs, result) {
             var flat = latlngs[0] instanceof L.LatLng, len = latlngs.length, i, ring;
