@@ -1,20 +1,21 @@
 {
   "name": "leaflet-hotline",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Leaflet plugin for drawing colored gradients along a polyline",
-  "main": "src/leaflet.hotline.js",
+  "main": "dist/leaflet.hotline.js",
   "scripts": {
-    "test": "npm run lint",
-    "lint": "eslint src/leaflet.hotline.js",
+    "test": "npm run lint && node_modules/.bin/mocha test",
+    "lint": "eslint src/*.js",
     "clean": "rm -rf dist",
-    "beautify": "uglifyjs src/leaflet.hotline.js -b --comments /iosphere/ > dist/leaflet.hotline.js",
-    "minify": "uglifyjs src/leaflet.hotline.js -c -m --comments /iosphere/ > dist/leaflet.hotline.min.js",
+    "concat": "cat src/Gradienter.js src/Hotline.js > dist/leaflet.hotline.src.js",
+    "beautify": "uglifyjs dist/leaflet.hotline.src.js -b --comments /iosphere/ > dist/leaflet.hotline.js",
+    "minify": "uglifyjs dist/leaflet.hotline.src.js -c -m --comments /iosphere/ > dist/leaflet.hotline.min.js",
     "prebuild": "npm run clean && mkdir -p dist",
-    "build": "npm run test && npm run beautify && npm run minify"
+    "build": "npm run test && npm run concat && npm run beautify && npm run minify"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/iosphere/Leaflet.hotline.git"
+    "url": "git://яя.git"
   },
   "keywords": [
     "Leaflet",
