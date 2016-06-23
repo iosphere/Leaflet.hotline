@@ -6,7 +6,7 @@ Inspired by [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat/).
 
 ## Requirements
 
-Leaflet.hotline only works with **Leaflet 1.0 beta**, which is available through NPM, Bower, and [GitHub download](https://github.com/Leaflet/Leaflet/archive/v1.0.0-beta.1.zip).
+Leaflet.hotline only works with **Leaflet 1.0.0-rc.1**, which is available through NPM, Bower, and [GitHub download](https://github.com/Leaflet/Leaflet/archive/v1.0.0-rc.1.zip).
 Leaflet.hotline needs a browser with canvas support because it creates its own renderer that draws on a canvas element.
 
 
@@ -86,6 +86,7 @@ You can use the following options to style the hotline:
 
 ## Changelog
 
+- **0.3.0** - Adds compatibility for Leaflet 1.0.0-rc.1
 - **0.2.0** - Adds `getRGBForValue` method to the hotline layer
 - **0.1.1** - Uses Leaflet 1.0 beta in demo and README
 - **0.1.0** - Initial public release

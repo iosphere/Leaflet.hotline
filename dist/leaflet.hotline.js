@@ -238,18 +238,19 @@
         getRGBForValue: function(value) {
             return this._renderer._hotline.getRGBForValue(value);
         },
-        _projectLatlngs: function(latlngs, result) {
+        _projectLatlngs: function(latlngs, result, projectedBounds) {
             var flat = latlngs[0] instanceof L.LatLng, len = latlngs.length, i, ring;
             if (flat) {
                 ring = [];
                 for (i = 0; i < len; i++) {
                     ring[i] = this._map.latLngToLayerPoint(latlngs[i]);
                     ring[i].z = latlngs[i].alt;
+                    projectedBounds.extend(ring[i]);
                 }
                 result.push(ring);
             } else {
                 for (i = 0; i < len; i++) {
-                    this._projectLatlngs(latlngs[i], result);
+                    this._projectLatlngs(latlngs[i], result, projectedBounds);
                 }
             }
         },
