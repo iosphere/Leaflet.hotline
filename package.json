@@ -4,6 +4,7 @@
   "description": "A Leaflet plugin for drawing colored gradients along a polyline",
   "main": "src/leaflet.hotline.js",
   "scripts": {
+    "rollup": "rollup -c",
     "test": "npm run lint",
     "lint": "eslint src/leaflet.hotline.js",
     "clean": "rm -rf dist",
@@ -35,6 +36,7 @@
   "homepage": "https://iosphere.github.io/Leaflet.hotline/demo/",
   "devDependencies": {
     "eslint": "^0.23.0",
+    "rollup": "^0.32.2",
     "uglify-js": "^2.4.23"
   }
 }
