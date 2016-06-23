@@ -406,7 +406,7 @@
 		/**
 		 * Just like the Leaflet version, but with support for a z coordinate.
 		 */
-		_projectLatlngs: function (latlngs, result) {
+		_projectLatlngs: function (latlngs, result, projectedBounds) {
 			var flat = latlngs[0] instanceof L.LatLng,
 					len = latlngs.length,
 					i, ring;
@@ -417,11 +417,12 @@
 					ring[i] = this._map.latLngToLayerPoint(latlngs[i]);
 					// Add the altitude of the latLng as the z coordinate to the point
 					ring[i].z = latlngs[i].alt;
+					projectedBounds.extend(ring[i]);
 				}
 				result.push(ring);
 			} else {
 				for (i = 0; i < len; i++) {
-					this._projectLatlngs(latlngs[i], result);
+					this._projectLatlngs(latlngs[i], result, projectedBounds);
 				}
 			}
 		},
