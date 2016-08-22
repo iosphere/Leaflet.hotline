@@ -1,10 +1,10 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.1/leaflet.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js"></script>
 	<script src="js/coords.js"></script>
-	<script src="../dist/leaflet.hotline.min.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.1/leaflet.css" />
+	<script src="../dist/leaflet.hotline.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" />
 	<style>
 		header,
 		section {
@@ -99,9 +99,9 @@
 		});
 		var map = L.map('map', {
 			layers: [tiles],
-			scrollWheelZoom: false,
-			dragging: false,
-			tap: false
+			// scrollWheelZoom: false,
+			// dragging: false,
+			// tap: false
 		});
 		var hotlineLayer = L.hotline(coords, {
 			min: 150,
