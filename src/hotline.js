@@ -13,9 +13,8 @@ export var Hotline = function (canvas) {
 		1.0: 'red'
 	};
 
-	this._canvas = canvas = typeof canvas === 'string'
-		? document.getElementById(canvas)
-		: canvas;
+	this._canvas = canvas =
+		typeof canvas === 'string' ? document.getElementById(canvas) : canvas;
 
 	this._ctx = canvas.getContext('2d');
 	this._width = canvas.width;
@@ -86,8 +85,8 @@ Hotline.prototype = {
 	 */
 	palette: function (palette) {
 		var canvas = document.createElement('canvas'),
-				ctx = canvas.getContext('2d'),
-				gradient = ctx.createLinearGradient(0, 0, 0, 256);
+		ctx = canvas.getContext('2d'),
+		gradient = ctx.createLinearGradient(0, 0, 0, 256);
 
 		canvas.width = 1;
 		canvas.height = 256;
@@ -229,7 +228,7 @@ Hotline.prototype = {
 	 */
 	_drawHotline: function (ctx) {
 		var i, j, dataLength, path, pathLength, pointStart, pointEnd,
-				gradient, gradientStartRGB, gradientEndRGB;
+		gradient, gradientStartRGB, gradientEndRGB;
 
 		ctx.lineWidth = this._weight;
 

@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import { Renderer, renderer } from './renderer.js';
+import {Renderer, renderer} from './renderer.js';
 import Util from './util.js';
 
 
@@ -32,8 +32,8 @@ export var Plugin = L.Polyline.extend({
 	 */
 	_projectLatlngs: function (latlngs, result, projectedBounds) {
 		var flat = latlngs[0] instanceof L.LatLng,
-				len = latlngs.length,
-				i, ring;
+		len = latlngs.length,
+		i, ring;
 
 		if (flat) {
 			ring = [];
@@ -63,8 +63,8 @@ export var Plugin = L.Polyline.extend({
 		this._parts = [];
 
 		var parts = this._parts,
-				bounds = this._renderer._bounds,
-				i, j, k, len, len2, segment, points;
+		bounds = this._renderer._bounds,
+		i, j, k, len, len2, segment, points;
 
 		for (i = 0, k = 0, len = this._rings.length; i < len; i++) {
 			points = this._rings[i];

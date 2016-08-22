@@ -1,10 +1,10 @@
 import L from 'leaflet';
 
 
-function clipSegment (a, b, bounds, useLastCode, round) {
+function clipSegment(a, b, bounds, useLastCode, round) {
 	var codeA = useLastCode ? this._lastCode : L.LineUtil._getBitCode(a, bounds),
-			codeB = L.LineUtil._getBitCode(b, bounds),
-			codeOut, p, newCode;
+	codeB = L.LineUtil._getBitCode(b, bounds),
+	codeOut, p, newCode;
 
 	// save 2nd code to avoid calculating it on the next segment
 	this._lastCode = codeB;

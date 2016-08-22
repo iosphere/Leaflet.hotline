@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import { Hotline } from './hotline.js';
+import {Hotline} from './hotline.js';
 
 
 export var Renderer = L.Canvas.extend({
@@ -27,19 +27,19 @@ export var Renderer = L.Canvas.extend({
 	},
 
 	_updateOptions: function (layer) {
-		if (layer.options.min != null) {
+		if (layer.options.min !== null) {
 			this._hotline.min(layer.options.min);
 		}
-		if (layer.options.max != null) {
+		if (layer.options.max !== null) {
 			this._hotline.max(layer.options.max);
 		}
-		if (layer.options.weight != null) {
+		if (layer.options.weight !== null) {
 			this._hotline.weight(layer.options.weight);
 		}
-		if (layer.options.outlineWidth != null) {
+		if (layer.options.outlineWidth !== null) {
 			this._hotline.outlineWidth(layer.options.outlineWidth);
 		}
-		if (layer.options.outlineColor != null) {
+		if (layer.options.outlineColor !== null) {
 			this._hotline.outlineColor(layer.options.outlineColor);
 		}
 		if (layer.options.palette) {
