@@ -1,29 +1,25 @@
 {
-  "rules": {
-    "camelcase": 2,
-    "quotes": [2, "single", "avoid-escape"],
-    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
-    "space-after-function-name": 2,
-    "space-in-parens": 2,
-    "space-in-brackets": 2,
-    "space-before-blocks": 2,
-    "space-after-keywords": 2,
-    "no-lonely-if": 2,
-    "comma-style": 2,
-    "no-underscore-dangle": 0,
-    "no-constant-condition": 0,
-    "no-multi-spaces": 0,
-    "strict": 0,
-    "key-spacing": 0,
-    "no-shadow": 0
-  },
+  "root": true,
   "globals": {
-    "L": false,
-    "require": false,
-    "module": false,
-    "define": false
+    "L": true
   },
   "env": {
-    "browser": true
+    "commonjs": true,
+    "amd": true,
+    "node": false
+  },
+  "extends": "mourner",
+  "parserOptions": {
+      "sourceType": "module"
+  },
+  "rules": {
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+    "indent": [2, "tab", {"VariableDeclarator": 0}],
+    "curly": 2,
+    "spaced-comment": 2,
+    "strict": 0,
+    "wrap-iife": 0,
+    "key-spacing": 0,
+    "consistent-return": 0
   }
 }
