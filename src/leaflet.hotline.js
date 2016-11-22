@@ -308,7 +308,7 @@
 
 			this._hotline
 				.data(parts)
-				.draw(this._clear);
+				.draw(false);
 		},
 
 		_updateOptions: function (layer) {
