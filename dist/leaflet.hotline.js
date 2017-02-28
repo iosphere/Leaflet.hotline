@@ -1,5 +1,5 @@
 /*
- (c) 2015, iosphere GmbH
+ (c) 2017, iosphere GmbH
  Leaflet.hotline, a Leaflet plugin for drawing gradients along polylines.
  https://github.com/iosphere/Leaflet.hotline/
 */
@@ -85,21 +85,11 @@
             this._data.push(path);
             return this;
         },
-        clear: function(clearData) {
-            if (clearData) {
-                this._data = [];
-            }
-            this._ctx.clearRect(0, 0, this._width, this._height);
-            return this;
-        },
-        draw: function(clear) {
+        draw: function() {
             var ctx = this._ctx;
-            ctx.globalCompositeOperation = clear ? "destination-out" : "source-over";
+            ctx.globalCompositeOperation = "source-over";
             ctx.lineCap = "round";
-            this._drawOutline(ctx, clear);
-            if (clear) {
-                return this;
-            }
+            this._drawOutline(ctx);
             this._drawHotline(ctx);
             return this;
         },
@@ -108,13 +98,12 @@
             var paletteIndex = Math.floor(valueRelative * 256) * 4;
             return [ this._palette[paletteIndex], this._palette[paletteIndex + 1], this._palette[paletteIndex + 2] ];
         },
-        _drawOutline: function(ctx, clear) {
-            var i, j, dataLength, path, lineWidth, pathLength, pointStart, pointEnd;
-            if (clear || this._outlineWidth) {
+        _drawOutline: function(ctx) {
+            var i, j, dataLength, path, pathLength, pointStart, pointEnd;
+            if (this._outlineWidth) {
                 for (i = 0, dataLength = this._data.length; i < dataLength; i++) {
                     path = this._data[i];
-                    lineWidth = this._weight + 2 * this._outlineWidth;
-                    path._prevWidth = ctx.lineWidth = clear ? (path._prevWidth || lineWidth) + 1 : lineWidth;
+                    ctx.lineWidth = this._weight + 2 * this._outlineWidth;
                     for (j = 1, pathLength = path.length; j < pathLength; j++) {
                         pointStart = path[j - 1];
                         pointEnd = path[j];
@@ -160,12 +149,15 @@
             this._hotline.height(this._container.height);
         },
         _updatePoly: function(layer) {
+            if (!this._drawing) {
+                return;
+            }
             var parts = layer._parts;
             if (!parts.length) {
                 return;
             }
             this._updateOptions(layer);
-            this._hotline.data(parts).draw(this._clear);
+            this._hotline.data(parts).draw();
         },
         _updateOptions: function(layer) {
             if (layer.options.min != null) {
