@@ -1,6 +1,6 @@
 {
   "name": "leaflet-hotline",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A Leaflet plugin for drawing colored gradients along a polyline",
   "main": "src/leaflet.hotline.js",
   "scripts": {
