@@ -1,10 +1,10 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.1/leaflet.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
 	<script src="js/coords.js"></script>
 	<script src="../dist/leaflet.hotline.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.1/leaflet.css" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
 	<style>
 		header,
 		section {
@@ -94,8 +94,8 @@
 		</aside>
 	</section>
 	<script>
-		var tiles = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		var tiles = L.tileLayer('//{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		});
 		var map = L.map('map', {
 			layers: [tiles],
