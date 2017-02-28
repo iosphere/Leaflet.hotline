@@ -175,33 +175,15 @@
 		},
 
 		/**
-		 * Clears the canvas and optionally resets the data.
-		 * @param {boolean} clearData - Also clear the data.
-		 */
-		clear: function (clearData) {
-			if (clearData) {
-				this._data = [];
-			}
-			this._ctx.clearRect(0, 0, this._width, this._height);
-			return this;
-		},
-
-		/**
 		 * Draws the currently set paths.
-		 * @param {boolean} clear - Don't draw as a hotline but remove the currently
-		 * set paths without clearing the complete canvas.
 		 */
-		draw: function (clear) {
+		draw: function () {
 			var ctx = this._ctx;
 
-			ctx.globalCompositeOperation = clear ? 'destination-out' : 'source-over';
+			ctx.globalCompositeOperation = 'source-over';
 			ctx.lineCap = 'round';
 
-			this._drawOutline(ctx, clear);
-
-			// No need to draw expensive gradients when clearing
-			if (clear) { return this; }
-
+			this._drawOutline(ctx);
 			this._drawHotline(ctx);
 
 			return this;
@@ -227,16 +209,13 @@
 		 * Draws the outline of the graphs.
 		 * @private
 		 */
-		_drawOutline: function (ctx, clear) {
-			var i, j, dataLength, path, lineWidth, pathLength, pointStart, pointEnd;
+		_drawOutline: function (ctx) {
+			var i, j, dataLength, path, pathLength, pointStart, pointEnd;
 
-			if (clear || this._outlineWidth) {
+			if (this._outlineWidth) {
 				for (i = 0, dataLength = this._data.length; i < dataLength; i++) {
 					path = this._data[i];
-					lineWidth = this._weight + 2 * this._outlineWidth;
-
-					// If clearing a path, do it with its previous line width and a little bit extra
-					path._prevWidth = ctx.lineWidth = clear ? (path._prevWidth || lineWidth) + 1 : lineWidth;
+					ctx.lineWidth = this._weight + 2 * this._outlineWidth;
 
 					for (j = 1, pathLength = path.length; j < pathLength; j++) {
 						pointStart = path[j - 1];
@@ -300,6 +279,8 @@
 		},
 
 		_updatePoly: function (layer) {
+			if (!this._drawing) { return; }
+
 			var parts = layer._parts;
 
 			if (!parts.length) { return; }
@@ -308,7 +289,7 @@
 
 			this._hotline
 				.data(parts)
-				.draw(this._clear);
+				.draw();
 		},
 
 		_updateOptions: function (layer) {
