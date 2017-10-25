@@ -1,5 +1,4 @@
 function makeGradienter() {
-
     var MathUtil = {
         /**
          * Откладываем от point1 расстояние distance в направлении point2
@@ -271,9 +270,4 @@ function makeGradienter() {
     return Gradienter;
 }
 
-if (typeof window !== 'undefined') {
-    window.L.Util.Gradienter = makeGradienter();
-} else {
-    // Для тестов
-    module.exports = makeGradienter();
-}
+module.exports = makeGradienter();

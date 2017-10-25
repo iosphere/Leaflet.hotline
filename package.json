@@ -4,18 +4,14 @@
   "description": "A Leaflet plugin for drawing colored gradients along a polyline",
   "main": "dist/leaflet.hotline.js",
   "scripts": {
-    "test": "npm run lint && node_modules/.bin/mocha test",
-    "lint": "eslint src/*.js",
-    "clean": "rm -rf dist",
-    "concat": "cat src/Gradienter.js src/Hotline.js > dist/leaflet.hotline.src.js",
-    "beautify": "uglifyjs dist/leaflet.hotline.src.js -b --comments /iosphere/ > dist/leaflet.hotline.js",
-    "minify": "uglifyjs dist/leaflet.hotline.src.js -c -m --comments /iosphere/ > dist/leaflet.hotline.min.js",
-    "prebuild": "npm run clean && mkdir -p dist",
-    "build": "npm run test && npm run concat && npm run beautify && npm run minify"
+    "dev": "WEBPACK_ENV=dev webpack-dev-server",
+    "build": "webpack",
+    "test": "mocha --compilers js:babel-core/register --recursive test",
+    "lint": "eslint src/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://яя.git"
+    "url": "git@github.com:2gis/Leaflet.hotline.git"
   },
   "keywords": [
     "Leaflet",
@@ -35,7 +31,17 @@
   },
   "homepage": "https://iosphere.github.io/Leaflet.hotline/demo/",
   "devDependencies": {
+    "2gis-maps": "^3.3.5",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015-webpack": "^6.4.3",
     "eslint": "^0.23.0",
-    "uglify-js": "^2.4.23"
+    "html-webpack-plugin": "^2.30.1",
+    "mocha": "^4.0.1",
+    "raw-loader": "^0.5.1",
+    "uglify-js": "^2.4.23",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3",
+    "webpack-livereload-plugin": "^1.0.0"
   }
 }

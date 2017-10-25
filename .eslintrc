@@ -19,6 +19,7 @@
   },
   "globals": {
     "L": false,
+    "DG": false,
     "require": false,
     "module": false,
     "define": false
