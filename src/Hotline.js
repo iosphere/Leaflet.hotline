@@ -593,7 +593,9 @@ L.Hotline = L.Polyline.extend({
     },
 
     options: {
+        tolerance: 0,
         renderer: renderer(),
+
         min: 0,
         max: 1,
         palette: {
@@ -735,7 +737,7 @@ L.Hotline = L.Polyline.extend({
         for (i = 0, outlinesLength = this.options.outlines.length; i < outlinesLength; i++) {
             outlinesWidthes.push(this.options.outlines[i].weight);
         }
-        return this.options.weight / 2 + Math.max.apply(this, outlinesWidthes) + (L.Browser.touch ? 10 : 0);
+        return this.options.weight / 2 + Math.max.apply(this, outlinesWidthes) + this.options.tolerance;
     }
 });
 
