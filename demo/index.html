@@ -1,14 +1,14 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
 	<script src="js/coords.js"></script>
 	<script src="../dist/leaflet.hotline.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
 	<style>
 		header,
 		section {
-			max-width: 600px;
+			max-width: 700px;
 			margin: 1.5em auto;
 			text-align: center;
 		}
@@ -78,14 +78,20 @@
 			<label>
 				<span>Palette color 1</span>
 				<input id="paletteColor1" type="color" value="#008800"/>
+				<br/>
+				0 <input id="paletteColor1Alpha" type="range" min="0" max="255" value="255"/> 1.0
 			</label>
 			<label>
 				<span>Palette color 2</span>
 				<input id="paletteColor2" type="color" value="#ffff00"/>
+				<br/>
+				0 <input id="paletteColor2Alpha" type="range" min="0" max="255" value="255"/> 1.0
 			</label>
 			<label>
 				<span>Palette color 3</span>
 				<input id="paletteColor3" type="color" value="#ff0000"/>
+				<br/>
+				0 <input id="paletteColor3Alpha" type="range" min="0" max="255" value="255"/> 1.0
 			</label>
 			<label>
 				<span>Smooth factor - </span>
@@ -94,7 +100,7 @@
 		</aside>
 	</section>
 	<script>
-		var tiles = L.tileLayer('//{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		});
 		var map = L.map('map', {
@@ -107,9 +113,9 @@
 			min: 150,
 			max: 350,
 			palette: {
-				0.0: '#008800',
-				0.5: '#ffff00',
-				1.0: '#ff0000'
+				0.0: '#008800ff',
+				0.5: '#ffff00ff',
+				1.0: '#ff0000ff'
 			},
 			weight: 5,
 			outlineColor: '#000000',
@@ -139,12 +145,21 @@
 		[paletteColor1, paletteColor2, paletteColor3].forEach(function (element) {
 			element.addEventListener('input', updatePalette);
 		});
+		var paletteColor1Alpha = document.getElementById('paletteColor1Alpha');
+		var paletteColor2Alpha = document.getElementById('paletteColor2Alpha');
+		var paletteColor3Alpha = document.getElementById('paletteColor3Alpha');
+		[paletteColor1Alpha, paletteColor2Alpha, paletteColor3Alpha].forEach(function (element) {
+			element.addEventListener('input', updatePalette);
+		});
 		function updatePalette() {
+			let a1 = parseInt(paletteColor1Alpha.value).toString(16);
+			let a2 = parseInt(paletteColor2Alpha.value).toString(16);
+			let a3 = parseInt(paletteColor3Alpha.value).toString(16);
 			hotlineLayer.setStyle({
 				'palette': {
-					0.0: paletteColor1.value,
-					0.5: paletteColor2.value,
-					1.0: paletteColor3.value
+					0.0: paletteColor1.value + (a1.length == 1 ? "0" : "") + a1,
+					0.5: paletteColor2.value + (a2.length == 1 ? "0" : "") + a2,
+					1.0: paletteColor3.value + (a3.length == 1 ? "0" : "") + a3
 				}
 			}).redraw();
 		}
