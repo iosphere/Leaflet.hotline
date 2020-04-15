@@ -201,7 +201,8 @@
 			return [
 				this._palette[paletteIndex],
 				this._palette[paletteIndex + 1],
-				this._palette[paletteIndex + 2]
+				this._palette[paletteIndex + 2],
+				this._palette[paletteIndex + 3] / 255.0
 			];
 		},
 
@@ -213,21 +214,28 @@
 			var i, j, dataLength, path, pathLength, pointStart, pointEnd;
 
 			if (this._outlineWidth) {
-				for (i = 0, dataLength = this._data.length; i < dataLength; i++) {
-					path = this._data[i];
-					ctx.lineWidth = this._weight + 2 * this._outlineWidth;
+				ctx.save();
+				const lws = [this._weight, this._weight + 2 * this._outlineWidth];
+				const gcos = ['source-over', 'source-out'];
+				const clrs = ['white', this._outlineColor];
+				for (let w = 0; w < 2; w++) {
+					ctx.strokeStyle = clrs[w];
+					ctx.lineWidth = lws[w];
+					ctx.globalCompositeOperation = gcos[w];
+					ctx.beginPath();
+					for (i = 0, dataLength = this._data.length; i < dataLength; i++) {
+						path = this._data[i];
+						for (j = 1, pathLength = path.length; j < pathLength; j++) {
+							pointStart = path[j - 1];
+							pointEnd = path[j];
 
-					for (j = 1, pathLength = path.length; j < pathLength; j++) {
-						pointStart = path[j - 1];
-						pointEnd = path[j];
-
-						ctx.strokeStyle = this._outlineColor;
-						ctx.beginPath();
-						ctx.moveTo(pointStart.x, pointStart.y);
-						ctx.lineTo(pointEnd.x, pointEnd.y);
-						ctx.stroke();
+							ctx.moveTo(pointStart.x, pointStart.y);
+							ctx.lineTo(pointEnd.x, pointEnd.y);
+						}
 					}
+					ctx.stroke();
 				}
+				ctx.restore();
 			}
 		},
 
@@ -239,6 +247,7 @@
 			var i, j, dataLength, path, pathLength, pointStart, pointEnd,
 					gradient, gradientStartRGB, gradientEndRGB;
 
+			ctx.save();
 			ctx.lineWidth = this._weight;
 
 			for (i = 0, dataLength = this._data.length; i < dataLength; i++) {
@@ -262,6 +271,7 @@
 					ctx.stroke();
 				}
 			}
+			ctx.restore();
 		}
 	};
 
