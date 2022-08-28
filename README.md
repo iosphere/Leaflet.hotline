@@ -77,6 +77,7 @@ You can use the following options to style the hotline:
 - **palette** - The config for the palette gradient in the form of `{ <stop>: '<color>' }`. `{ 0.0: 'green', 0.5: 'yellow', 1.0: 'red' }` per default. Stop values should be between `0` and `1`.
 - **min** - The smallest z value expected in the `data` array. This maps to the `0` stop value. Any z values smaller than this will be considered as `min` when choosing the color to use.
 - **max** - The largest z value expected in the `data` array. This maps to the `1` stop value. Any z values greater than this will be considered as `max` when choosing the color to use.
+- **discreteStrokes** - If true use the endpoint color for each line segement instead of a gradient
 
 
 ## Building
