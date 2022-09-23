@@ -53,6 +53,7 @@
 		this._weight = 5;
 		this._outlineWidth = 1;
 		this._outlineColor = 'black';
+		this._discreteStrokes = false;
 
 		this._min = 0;
 		this._max = 1;
@@ -105,6 +106,15 @@
 		 */
 		outlineColor: function (outlineColor) {
 			this._outlineColor = outlineColor;
+			return this;
+		},
+
+		/**
+		 * Sets the color of the outline around the path.
+		 * @param {string} outlineColor - A CSS color value.
+		 */
+		discreteStrokes: function (discreteStrokes) {
+			this._discreteStrokes = discreteStrokes;
 			return this;
 		},
 
@@ -247,15 +257,19 @@
 				for (j = 1, pathLength = path.length; j < pathLength; j++) {
 					pointStart = path[j - 1];
 					pointEnd = path[j];
-
-					// Create a gradient for each segment, pick start end end colors from palette gradient
-					gradient = ctx.createLinearGradient(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
-					gradientStartRGB = this.getRGBForValue(pointStart.z);
+					
 					gradientEndRGB = this.getRGBForValue(pointEnd.z);
-					gradient.addColorStop(0, 'rgb(' + gradientStartRGB.join(',') + ')');
-					gradient.addColorStop(1, 'rgb(' + gradientEndRGB.join(',') + ')');
+					if(!this._discreteStrokes) {
+					    // Create a gradient for each segment, pick start end end colors from palette gradient
+					    gradientStartRGB = this.getRGBForValue(pointStart.z);
+					    gradient = ctx.createLinearGradient(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
+					    gradient.addColorStop(0, 'rgb(' + gradientStartRGB.join(',') + ')');
+					    gradient.addColorStop(1, 'rgb(' + gradientEndRGB.join(',') + ')');
+					    ctx.strokeStyle = gradient;
+					} else {
+					    ctx.strokeStyle = 'rgb('+ gradientEndRGB.join(',') + ')';
+					}
 
-					ctx.strokeStyle = gradient;
 					ctx.beginPath();
 					ctx.moveTo(pointStart.x, pointStart.y);
 					ctx.lineTo(pointEnd.x, pointEnd.y);
@@ -307,6 +321,9 @@
 			}
 			if (layer.options.outlineColor != null) {
 				this._hotline.outlineColor(layer.options.outlineColor);
+			}
+			if (layer.options.discreteStrokes != null) {
+				this._hotline.discreteStrokes(layer.options.discreteStrokes);
 			}
 			if (layer.options.palette) {
 				this._hotline.palette(layer.options.palette);
@@ -377,7 +394,8 @@
 			},
 			weight: 5,
 			outlineColor: 'black',
-			outlineWidth: 1
+			outlineWidth: 1,
+			discreteStrokes: false
 		},
 
 		getRGBForValue: function (value) {
